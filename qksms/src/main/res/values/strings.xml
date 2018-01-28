@@ -85,6 +85,27 @@
     <string name="settings_sync_title">Sync messages</string>
     <string name="settings_sync_summary">Re-sync your messages with the native Android SMS database</string>
 
+    <string name="qksms_plus_themes_title">Premium themes</string>
+    <string name="qksms_plus_themes_summary">Unlock beautiful theme colors not available on the Material Design palette</string>
+    <string name="qksms_plus_emoji_title">Custom auto-emoji</string>
+    <string name="qksms_plus_emoji_summary">Create custom auto-emoji shortcuts</string>
+    <string name="qksms_plus_backup_title">Message backup</string>
+    <string name="qksms_plus_backup_summary">Automatically back up your messages. Never again worry about losing your history if you change phones or your phone gets lost</string>
+    <string name="qksms_plus_scheduled_title">Scheduled messages</string>
+    <string name="qksms_plus_scheduled_summary">Wait a few seconds before sending your message</string>
+    <string name="qksms_plus_delayed_title">Delayed sending</string>
+    <string name="qksms_plus_delayed_summary">Wait a few seconds before sending your message</string>
+    <string name="qksms_plus_night_title">Automatic night mode</string>
+    <string name="qksms_plus_night_summary">Enable night mode based on the time of day</string>
+    <string name="qksms_plus_blacklist_title">Blacklist</string>
+    <string name="qksms_plus_blacklist_summary">Block unwanted numbers from messaging you</string>
+    <string name="qksms_plus_forward_title">Auto-forward</string>
+    <string name="qksms_plus_forward_summary">Automatically forward messages from certain senders</string>
+    <string name="qksms_plus_respond_title">Auto-respond</string>
+    <string name="qksms_plus_respond_summary">Automatically respond to incoming messages with a preset response</string>
+    <string name="qksms_plus_more_title">More</string>
+    <string name="qksms_plus_more_summary">QKSMS is under active development, your subscription will unlock all future QKSMS+ features for free!</string>
+
     <string name="settings_dialog_theme_title">Theme</string>
 
     <string name="notification_reply">Reply</string>

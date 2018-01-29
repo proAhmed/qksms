@@ -27,6 +27,8 @@ import presentation.feature.compose.ComposeViewModel
 import presentation.feature.compose.DetailedChipView
 import presentation.feature.main.MainActivity
 import presentation.feature.main.MainViewModel
+import presentation.feature.plus.PlusActivity
+import presentation.feature.plus.PlusViewModel
 import presentation.feature.settings.SettingsActivity
 import presentation.feature.settings.SettingsViewModel
 import presentation.feature.setup.SetupActivity
@@ -45,6 +47,7 @@ interface AppComponent {
     fun inject(activity: MainActivity)
     fun inject(activity: SetupActivity)
     fun inject(activity: ComposeActivity)
+    fun inject(activity: PlusActivity)
     fun inject(activity: SettingsActivity)
     fun inject(activity: ThemePickerActivity)
 
@@ -70,6 +73,7 @@ interface AppComponent {
     fun inject(viewModel: MainViewModel)
     fun inject(viewModel: SetupViewModel)
     fun inject(viewModel: ComposeViewModel)
+    fun inject(viewModel: PlusViewModel)
     fun inject(viewModel: SettingsViewModel)
     fun inject(viewModel: ThemePickerViewModel)
 

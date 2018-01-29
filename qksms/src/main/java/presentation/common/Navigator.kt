@@ -32,6 +32,8 @@ import common.util.NotificationManager
 import presentation.feature.compose.ComposeActivity
 import presentation.feature.compose.ComposeViewModel
 import presentation.feature.main.MainViewModel
+import presentation.feature.plus.PlusActivity
+import presentation.feature.plus.PlusViewModel
 import presentation.feature.settings.SettingsActivity
 import presentation.feature.settings.SettingsViewModel
 import presentation.feature.setup.SetupActivity
@@ -51,6 +53,11 @@ class Navigator @Inject constructor(val context: Context) {
 
     fun showSetupActivity() {
         val intent = Intent(context, SetupActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun showQksmsPlusActivity() {
+        val intent = Intent(context, PlusActivity::class.java)
         startActivity(intent)
     }
 
@@ -116,6 +123,7 @@ class Navigator @Inject constructor(val context: Context) {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             return when (modelClass) {
                 MainViewModel::class.java -> MainViewModel()
+                PlusViewModel::class.java -> PlusViewModel()
                 SetupViewModel::class.java -> SetupViewModel()
                 ComposeViewModel::class.java -> ComposeViewModel(intent)
                 SettingsViewModel::class.java -> SettingsViewModel()

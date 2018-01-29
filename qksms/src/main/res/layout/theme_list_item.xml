@@ -17,7 +17,7 @@
   ~ You should have received a copy of the GNU General Public License
   ~ along with QKSMS.  If not, see <http://www.gnu.org/licenses/>.
   -->
-<presentation.common.widget.SquareFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
@@ -30,4 +30,4 @@
         android:background="@drawable/circle"
         tools:backgroundTint="@color/tools_theme" />
 
-</presentation.common.widget.SquareFrameLayout>
+</FrameLayout>

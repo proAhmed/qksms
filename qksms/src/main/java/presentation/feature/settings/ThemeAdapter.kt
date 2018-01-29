@@ -19,12 +19,14 @@
 package presentation.feature.settings
 
 import android.content.Context
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayout
 import com.moez.QKSMS.R
+import common.util.extensions.dpToPx
 import common.util.extensions.setBackgroundTint
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
@@ -40,11 +42,8 @@ class ThemeAdapter @Inject constructor(private val context: Context) : QkAdapter
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QkViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.theme_palette_list_item, parent, false)
-
-        view.palette.run {
-            flexWrap = FlexWrap.WRAP
-            flexDirection = FlexDirection.ROW
-        }
+        view.palette.flexWrap = FlexWrap.WRAP
+        view.palette.flexDirection = FlexDirection.ROW
 
         return QkViewHolder(view)
     }
@@ -53,18 +52,29 @@ class ThemeAdapter @Inject constructor(private val context: Context) : QkAdapter
         val palette = getItem(position)
         val view = holder.itemView
 
-        view.palette.removeAllViews()
+        val screenWidth = Resources.getSystem().displayMetrics.widthPixels
+        val minPadding = (16 * 6).dpToPx(context)
+        val size = if (screenWidth - minPadding > (56 * 5).dpToPx(context)) {
+            56.dpToPx(context)
+        } else {
+            (screenWidth - minPadding) / 5
+        }
+        val swatchPadding = (screenWidth - size * 5) / 12
 
-        // TODO this is hardcoded and bad but all palettes are hardcoded to have 10 colors, so it's fine for now
+        view.palette.removeAllViews()
+        view.palette.setPadding(swatchPadding, swatchPadding, swatchPadding, swatchPadding)
+
         (palette.subList(0, 5) + palette.subList(5, 10).reversed())
                 .mapIndexed { index, color ->
                     LayoutInflater.from(context).inflate(R.layout.theme_list_item, view.palette, false).apply {
                         theme.setBackgroundTint(color)
                         setOnClickListener { colorSelected.onNext(color) }
 
-                        (layoutParams as FlexboxLayout.LayoutParams).run {
+                        layoutParams = (layoutParams as FlexboxLayout.LayoutParams).apply {
+                            height = size
+                            width = size
                             isWrapBefore = index % 5 == 0
-                            flexGrow = 5f
+                            setMargins(swatchPadding, swatchPadding, swatchPadding, swatchPadding)
                         }
                     }
                 }

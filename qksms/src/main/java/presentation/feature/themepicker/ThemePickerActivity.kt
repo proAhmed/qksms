@@ -27,7 +27,6 @@ import common.di.appComponent
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.theme_picker_activity.*
 import presentation.common.base.QkActivity
-import presentation.feature.settings.ThemeAdapter
 import javax.inject.Inject
 
 class ThemePickerActivity : QkActivity<ThemePickerViewModel>(), ThemePickerView {

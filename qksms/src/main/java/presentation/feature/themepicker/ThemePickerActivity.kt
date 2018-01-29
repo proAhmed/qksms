@@ -19,7 +19,7 @@
 package presentation.feature.themepicker
 
 import android.os.Bundle
-import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
 import com.moez.QKSMS.R
 import com.uber.autodispose.android.lifecycle.scope
 import com.uber.autodispose.kotlin.autoDisposable
@@ -28,17 +28,14 @@ import io.reactivex.Observable
 import kotlinx.android.synthetic.main.theme_picker_activity.*
 import presentation.common.base.QkActivity
 import presentation.feature.settings.ThemeAdapter
+import javax.inject.Inject
 
 class ThemePickerActivity : QkActivity<ThemePickerViewModel>(), ThemePickerView {
 
     override val viewModelClass = ThemePickerViewModel::class
     override val themeSelectedIntent: Observable<Int> by lazy { themeAdapter.colorSelected }
 
-    private val themeAdapter by lazy {
-        ThemeAdapter(this@ThemePickerActivity).apply {
-            data = colors.materialColors.flatten().map { it.toInt() }
-        }
-    }
+    @Inject lateinit var themeAdapter: ThemeAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         appComponent.inject(this)
@@ -48,7 +45,9 @@ class ThemePickerActivity : QkActivity<ThemePickerViewModel>(), ThemePickerView 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         viewModel.bindView(this)
 
-        materialColors.layoutManager = GridLayoutManager(this, 5)
+        themeAdapter.data = colors.materialColors
+
+        materialColors.layoutManager = LinearLayoutManager(this)
         materialColors.adapter = themeAdapter
 
         colors.background

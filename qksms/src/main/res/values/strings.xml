@@ -88,7 +88,7 @@
     <string name="settings_sync_summary">Re-sync your messages with the native Android SMS database</string>
 
     <string name="qksms_plus_description_title">Pay what you like, unlock everything</string>
-    <string name="qksms_plus_description_summary">You can save a starving developer for as little as $s a year</string>
+    <string name="qksms_plus_description_summary">You can save a starving developer for as little as %s a year</string>
     <string name="qksms_plus_option_supporter">Supporter</string>
     <string name="qksms_plus_option_donor">Donor</string>
     <string name="qksms_plus_option_philanthropist">Philanthropist</string>

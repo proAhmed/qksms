@@ -30,6 +30,12 @@ import javax.inject.Inject
 
 class BillingManager @Inject constructor(context: Context) : PurchasesUpdatedListener {
 
+    companion object {
+        const val SKU_3 = "qksms_plus_3"
+        const val SKU_5 = "qksms_plus_5"
+        const val SKU_10 = "qksms_plus_10"
+    }
+
     val purchases: Observable<List<Purchase>> = BehaviorSubject.create()
     val iabs: Observable<List<SkuDetails>> = BehaviorSubject.create()
     val subs: Observable<List<SkuDetails>> = BehaviorSubject.create()

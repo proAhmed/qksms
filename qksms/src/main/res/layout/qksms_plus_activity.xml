@@ -49,6 +49,7 @@
             app:textColor="primary" />
 
         <presentation.common.widget.QkTextView
+            android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="32dp"
@@ -232,7 +233,6 @@
         <presentation.common.widget.Separator
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginBottom="16dp"
             android:layout_marginTop="16dp" />
 
         <presentation.common.widget.PreferenceView

@@ -18,4 +18,10 @@
  */
 package presentation.feature.plus
 
-class PlusState
+data class PlusState(
+
+        val supporterPrice: String = "",
+        val donorPrice: String = "",
+        val philanthropistPrice: String = ""
+
+)

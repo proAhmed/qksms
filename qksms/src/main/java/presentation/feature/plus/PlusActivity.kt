@@ -20,7 +20,11 @@ package presentation.feature.plus
 
 import android.os.Bundle
 import com.moez.QKSMS.R
+import com.uber.autodispose.android.lifecycle.scope
+import com.uber.autodispose.kotlin.autoDisposable
 import common.di.appComponent
+import common.util.extensions.setBackgroundTint
+import kotlinx.android.synthetic.main.qksms_plus_activity.*
 import presentation.common.base.QkActivity
 
 class PlusActivity : QkActivity<PlusViewModel>(), PlusView {
@@ -33,9 +37,22 @@ class PlusActivity : QkActivity<PlusViewModel>(), PlusView {
         setContentView(R.layout.qksms_plus_activity)
         setTitle(R.string.title_qksms_plus)
         viewModel.bindView(this)
+
+        colors.background
+                .autoDisposable(scope())
+                .subscribe { color -> window.decorView.setBackgroundColor(color) }
+
+        colors.theme
+                .autoDisposable(scope())
+                .subscribe { color -> upgrade.setBackgroundTint(color) }
     }
 
     override fun render(state: PlusState) {
+        description.text = getString(R.string.qksms_plus_description_summary, state.supporterPrice)
+
+        supporterPrice.text = state.supporterPrice
+        donorPrice.text = state.donorPrice
+        philanthropistPrice.text = state.philanthropistPrice
     }
 
 }

@@ -47,7 +47,6 @@ import javax.inject.Inject
 class MainViewModel : QkViewModel<MainView, MainState>(MainState()) {
 
     @Inject lateinit var context: Context
-    @Inject lateinit var billingManager: BillingManager
     @Inject lateinit var navigator: Navigator
     @Inject lateinit var conversationFilter: ConversationFilter
     @Inject lateinit var messageRepo: MessageRepository
@@ -116,10 +115,6 @@ class MainViewModel : QkViewModel<MainView, MainState>(MainState()) {
         }
 
         markAllSeen.execute(Unit)
-
-        billingManager.purchases.subscribe { purchases -> Timber.v("Purchases: $purchases") }
-        billingManager.iabs.subscribe { iabs -> Timber.v("IABs: $iabs") }
-        billingManager.subs.subscribe { subs -> Timber.v("Subs: $subs") }
     }
 
     override fun bindView(view: MainView) {

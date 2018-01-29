@@ -18,10 +18,33 @@
  */
 package presentation.feature.plus
 
+import common.di.appComponent
+import common.util.BillingManager
+import io.reactivex.rxkotlin.plusAssign
 import presentation.common.base.QkViewModel
+import timber.log.Timber
+import javax.inject.Inject
 
 class PlusViewModel : QkViewModel<PlusView, PlusState>(PlusState()) {
 
+    @Inject lateinit var billingManager: BillingManager
 
+    init {
+        appComponent.inject(this)
+
+        billingManager.purchases.subscribe { purchases -> Timber.v("Purchases: $purchases") }
+        billingManager.iabs.subscribe { iabs -> Timber.v("IABs: $iabs") }
+        billingManager.subs.subscribe { subs -> Timber.v("Subs: $subs") }
+
+        disposables += billingManager.subs
+                .subscribe { subs ->
+                    newState {
+                        it.copy(
+                                supporterPrice = subs.firstOrNull { it.sku == BillingManager.SKU_3 }?.price ?: "",
+                                donorPrice = subs.firstOrNull { it.sku == BillingManager.SKU_5 }?.price ?: "",
+                                philanthropistPrice = subs.firstOrNull { it.sku == BillingManager.SKU_10 }?.price ?: "")
+                    }
+                }
+    }
 
 }

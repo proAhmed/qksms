@@ -26,6 +26,7 @@ import com.uber.autodispose.android.scope
 import com.uber.autodispose.kotlin.autoDisposable
 import common.di.appComponent
 import common.util.Colors
+import common.util.extensions.getColorCompat
 import io.reactivex.Observable
 import javax.inject.Inject
 
@@ -37,17 +38,32 @@ open class QkTextView @JvmOverloads constructor(context: Context, attrs: Attribu
     private var textColorObservable: Observable<Int>? = null
 
     init {
-        appComponent.inject(this)
+        if (!isInEditMode) {
+            appComponent.inject(this)
+        }
 
         context.obtainStyledAttributes(attrs, R.styleable.QkTextView)?.run {
-            textColorObservable = when (getInt(R.styleable.QkTextView_textColor, -1)) {
-                0 -> colors.textPrimary
-                1 -> colors.textSecondary
-                2 -> colors.textTertiary
-                3 -> colors.textPrimaryOnTheme
-                4 -> colors.textSecondaryOnTheme
-                5 -> colors.textTertiaryOnTheme
-                else -> null
+            val colorAttr = getInt(R.styleable.QkTextView_textColor, -1)
+            if (isInEditMode) {
+                setTextColor(context.getColorCompat(when (colorAttr) {
+                    0 -> R.color.textPrimary
+                    1 -> R.color.textSecondary
+                    2 -> R.color.textTertiary
+                    3 -> R.color.textPrimaryDark
+                    4 -> R.color.textSecondaryDark
+                    5 -> R.color.textTertiaryDark
+                    else -> R.color.textPrimary
+                }))
+            } else {
+                textColorObservable = when (colorAttr) {
+                    0 -> colors.textPrimary
+                    1 -> colors.textSecondary
+                    2 -> colors.textTertiary
+                    3 -> colors.textPrimaryOnTheme
+                    4 -> colors.textSecondaryOnTheme
+                    5 -> colors.textTertiaryOnTheme
+                    else -> null
+                }
             }
 
             recycle()

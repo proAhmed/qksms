@@ -21,10 +21,12 @@ package presentation.common.widget
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
+import com.moez.QKSMS.R
 import com.uber.autodispose.android.scope
 import com.uber.autodispose.kotlin.autoDisposable
 import common.di.appComponent
 import common.util.Colors
+import common.util.extensions.getColorCompat
 import javax.inject.Inject
 
 class Separator @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) : View(context, attrs) {
@@ -32,14 +34,20 @@ class Separator @JvmOverloads constructor(context: Context, attrs: AttributeSet?
     @Inject lateinit var colors: Colors
 
     init {
-        appComponent.inject(this)
+        if (!isInEditMode) {
+            appComponent.inject(this)
+        }
     }
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
 
-        colors.separator
-                .autoDisposable(scope())
-                .subscribe { color -> setBackgroundColor(color) }
+        if (isInEditMode) {
+            setBackgroundColor(context.getColorCompat(R.color.separatorLight))
+        } else {
+            colors.separator
+                    .autoDisposable(scope())
+                    .subscribe { color -> setBackgroundColor(color) }
+        }
     }
 }

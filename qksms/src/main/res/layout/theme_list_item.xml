@@ -30,4 +30,12 @@
         android:background="@drawable/circle"
         tools:backgroundTint="@color/tools_theme" />
 
+    <ImageView
+        android:id="@+id/check"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_check_black_24dp"
+        tools:tint="@color/textPrimaryDark" />
+
 </FrameLayout>

@@ -18,4 +18,8 @@
  */
 package presentation.feature.themepicker
 
-class ThemePickerState
+data class ThemePickerState(
+
+        val selectedColor: Int = -1
+
+)

@@ -22,6 +22,7 @@ import com.uber.autodispose.android.lifecycle.scope
 import com.uber.autodispose.kotlin.autoDisposable
 import common.di.appComponent
 import common.util.Preferences
+import io.reactivex.rxkotlin.plusAssign
 import presentation.common.base.QkViewModel
 import javax.inject.Inject
 
@@ -31,6 +32,9 @@ class ThemePickerViewModel : QkViewModel<ThemePickerView, ThemePickerState>(Them
 
     init {
         appComponent.inject(this)
+
+        disposables += prefs.theme.asObservable()
+                .subscribe { color -> newState { it.copy(selectedColor = color) } }
     }
 
     override fun bindView(view: ThemePickerView) {

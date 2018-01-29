@@ -55,6 +55,7 @@ class ThemePickerActivity : QkActivity<ThemePickerViewModel>(), ThemePickerView 
     }
 
     override fun render(state: ThemePickerState) {
+        themeAdapter.selectedColor = state.selectedColor
     }
 
 }

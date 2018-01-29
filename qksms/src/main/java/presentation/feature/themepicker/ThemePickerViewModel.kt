@@ -16,21 +16,29 @@
  * You should have received a copy of the GNU General Public License
  * along with QKSMS.  If not, see <http://www.gnu.org/licenses/>.
  */
-package presentation.feature.settings
+package presentation.feature.themepicker
 
-import android.net.Uri
-import io.reactivex.Observable
-import io.reactivex.subjects.Subject
-import presentation.common.base.QkView
-import presentation.common.widget.PreferenceView
+import com.uber.autodispose.android.lifecycle.scope
+import com.uber.autodispose.kotlin.autoDisposable
+import common.di.appComponent
+import common.util.Preferences
+import presentation.common.base.QkViewModel
+import javax.inject.Inject
 
-interface SettingsView : QkView<SettingsState> {
+class ThemePickerViewModel : QkViewModel<ThemePickerView, ThemePickerState>(ThemePickerState()) {
 
-    val preferenceClickIntent: Subject<PreferenceView>
-    val ringtoneSelectedIntent: Observable<String>
-    val mmsSizeSelectedIntent: Observable<Int>
+    @Inject lateinit var prefs: Preferences
 
-    fun showRingtonePicker(default: Uri)
-    fun showMmsSizePicker()
-    fun dismissMmsSizePicker()
+    init {
+        appComponent.inject(this)
+    }
+
+    override fun bindView(view: ThemePickerView) {
+        super.bindView(view)
+
+        view.themeSelectedIntent
+                .autoDisposable(view.scope())
+                .subscribe { color -> prefs.theme.set(color) }
+    }
+
 }

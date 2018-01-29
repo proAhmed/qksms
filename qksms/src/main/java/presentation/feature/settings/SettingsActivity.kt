@@ -28,7 +28,6 @@ import android.os.Build
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import com.google.android.flexbox.FlexboxLayoutManager
 import com.jakewharton.rxbinding2.view.clicks
 import com.moez.QKSMS.R
 import com.uber.autodispose.android.lifecycle.scope
@@ -37,7 +36,6 @@ import common.di.appComponent
 import common.util.extensions.dpToPx
 import common.util.extensions.setVisible
 import data.model.MenuItem
-import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
 import kotlinx.android.synthetic.main.settings_activity.*
@@ -53,7 +51,6 @@ class SettingsActivity : QkActivity<SettingsViewModel>(), SettingsView {
 
     override val viewModelClass = SettingsViewModel::class
     override val preferenceClickIntent: Subject<PreferenceView> = PublishSubject.create()
-    override val themeSelectedIntent: Observable<Int> by lazy { themeAdapter.colorSelected }
     override val ringtoneSelectedIntent: Subject<String> = PublishSubject.create()
     override val mmsSizeSelectedIntent: Subject<Int> by lazy { menuItemAdapter.menuItemClicks }
 
@@ -63,31 +60,6 @@ class SettingsActivity : QkActivity<SettingsViewModel>(), SettingsView {
             isIndeterminate = true
             setCancelable(false)
             setCanceledOnTouchOutside(false)
-        }
-    }
-
-    private val themeDialog by lazy {
-        AlertDialog.Builder(this)
-                .setTitle(R.string.settings_dialog_theme_title)
-                .setView(themeRecyclerView)
-                .setCancelable(false)
-                .create()
-    }
-
-    private val themeRecyclerView by lazy {
-        RecyclerView(this).apply {
-            val padding = 8.dpToPx(context)
-            setPadding(padding, padding, padding, padding)
-            adapter = themeAdapter
-            clipToPadding = false
-            clipChildren = false
-            layoutManager = FlexboxLayoutManager(this@SettingsActivity)
-        }
-    }
-
-    private val themeAdapter by lazy {
-        ThemeAdapter(this@SettingsActivity).apply {
-            data = colors.materialColors.flatten().map { it.toInt() }
         }
     }
 
@@ -142,9 +114,6 @@ class SettingsActivity : QkActivity<SettingsViewModel>(), SettingsView {
     }
 
     override fun render(state: SettingsState) {
-        if (themeDialog.isShowing && !state.selectingTheme) themeDialog.dismiss()
-        else if (!themeDialog.isShowing && state.selectingTheme) themeDialog.show()
-
         if (progressDialog.isShowing && !state.syncing) progressDialog.dismiss()
         else if (!progressDialog.isShowing && state.syncing) progressDialog.show()
 

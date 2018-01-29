@@ -36,9 +36,10 @@ import presentation.feature.settings.SettingsActivity
 import presentation.feature.settings.SettingsViewModel
 import presentation.feature.setup.SetupActivity
 import presentation.feature.setup.SetupViewModel
+import presentation.feature.themepicker.ThemePickerActivity
+import presentation.feature.themepicker.ThemePickerViewModel
 import javax.inject.Inject
 import javax.inject.Singleton
-
 
 @Singleton
 class Navigator @Inject constructor(val context: Context) {
@@ -78,6 +79,11 @@ class Navigator @Inject constructor(val context: Context) {
         startActivity(intent)
     }
 
+    fun showThemePicker() {
+        val intent = Intent(context, ThemePickerActivity::class.java)
+        startActivity(intent)
+    }
+
     fun makePhoneCall(address: String) {
         val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$address"))
         startActivity(intent)
@@ -113,6 +119,7 @@ class Navigator @Inject constructor(val context: Context) {
                 SetupViewModel::class.java -> SetupViewModel()
                 ComposeViewModel::class.java -> ComposeViewModel(intent)
                 SettingsViewModel::class.java -> SettingsViewModel()
+                ThemePickerViewModel::class.java -> ThemePickerViewModel()
                 else -> throw IllegalArgumentException("Invalid ViewModel class. If this is a new ViewModel, please add it to Navigator.kt")
             } as T
         }

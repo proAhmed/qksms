@@ -31,6 +31,8 @@ import presentation.feature.settings.SettingsActivity
 import presentation.feature.settings.SettingsViewModel
 import presentation.feature.setup.SetupActivity
 import presentation.feature.setup.SetupViewModel
+import presentation.feature.themepicker.ThemePickerActivity
+import presentation.feature.themepicker.ThemePickerViewModel
 import presentation.receiver.*
 import javax.inject.Singleton
 
@@ -44,6 +46,7 @@ interface AppComponent {
     fun inject(activity: SetupActivity)
     fun inject(activity: ComposeActivity)
     fun inject(activity: SettingsActivity)
+    fun inject(activity: ThemePickerActivity)
 
     fun inject(receiver: DefaultSmsChangedReceiver)
     fun inject(receiver: SmsReceiver)
@@ -68,6 +71,7 @@ interface AppComponent {
     fun inject(viewModel: SetupViewModel)
     fun inject(viewModel: ComposeViewModel)
     fun inject(viewModel: SettingsViewModel)
+    fun inject(viewModel: ThemePickerViewModel)
 
     fun inject(fetcher: ContactImageLoader.ContactImageFetcher)
 

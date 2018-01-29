@@ -26,6 +26,7 @@
     <string name="title_settings">Settings</string>
     <string name="title_conversations">Search inbox…</string>
     <string name="title_compose">Type a name or number</string>
+    <string name="title_qksms_plus">QKSMS+</string>
 
     <string name="setup_title">Love texting again</string>
     <string name="setup_summary">Make QKSMS your default SMS app</string>
@@ -85,6 +86,13 @@
     <string name="settings_sync_title">Sync messages</string>
     <string name="settings_sync_summary">Re-sync your messages with the native Android SMS database</string>
 
+    <string name="qksms_plus_description_title">Pay what you like, unlock everything</string>
+    <string name="qksms_plus_description_summary">You can save a starving developer for as little as $s a year</string>
+    <string name="qksms_plus_option_supporter">Supporter</string>
+    <string name="qksms_plus_option_donor">Donor</string>
+    <string name="qksms_plus_option_philanthropist">Philanthropist</string>
+    <string name="qksms_plus_renewal_year">/year</string>
+    <string name="qksms_plus_upgrade">Upgrade to QKSMS+</string>
     <string name="qksms_plus_themes_title">Premium themes</string>
     <string name="qksms_plus_themes_summary">Unlock beautiful theme colors not available on the Material Design palette</string>
     <string name="qksms_plus_emoji_title">Custom auto-emoji</string>

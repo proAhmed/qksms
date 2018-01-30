@@ -17,294 +17,316 @@
   ~ You should have received a copy of the GNU General Public License
   ~ along with QKSMS.  If not, see <http://www.gnu.org/licenses/>.
   -->
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
-    <LinearLayout
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="160dp"
+        android:fitsSystemWindows="true">
 
-        <presentation.common.widget.QkTextView
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginRight="32dp"
-            android:text="@string/title_qksms_plus"
-            android:textSize="48sp"
-            app:textColor="primary" />
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:collapsedTitleTextAppearance="@style/CollapsingToolbarCollapsedText"
+            app:expandedTitleTextAppearance="@style/CollapsingToolbarExpandedText"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-        <presentation.common.widget.QkTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="32dp"
-            android:layout_marginRight="32dp"
-            android:text="@string/qksms_plus_description_title"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:textColor="primary" />
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin" />
 
-        <presentation.common.widget.QkTextView
-            android:id="@+id/description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="32dp"
-            android:layout_marginRight="32dp"
-            android:text="@string/qksms_plus_description_summary"
-            android:textSize="14sp"
-            app:textColor="secondary" />
+        </android.support.design.widget.CollapsingToolbarLayout>
 
-        <presentation.common.widget.Separator
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginRight="32dp"
-            android:layout_marginTop="16dp" />
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/supporter"
+            <presentation.common.widget.QkTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:text="@string/qksms_plus_description_title"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:textColor="primary" />
+
+            <presentation.common.widget.QkTextView
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:text="@string/qksms_plus_description_summary"
+                android:textSize="14sp"
+                app:textColor="secondary" />
+
+            <presentation.common.widget.Separator
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginTop="16dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/supporter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingTop="8dp">
+
+                    <presentation.common.widget.QkTextView
+                        android:id="@+id/supporterName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/qksms_plus_option_supporter"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:textColor="primary" />
+
+                    <presentation.common.widget.QkTextView
+                        android:id="@+id/supporterPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toStartOf="@id/supporterPeriod"
+                        app:layout_constraintHorizontal_chainStyle="packed"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/supporterName"
+                        app:textColor="primary"
+                        tools:text="$2.99" />
+
+                    <presentation.common.widget.QkTextView
+                        android:id="@+id/supporterPeriod"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/qksms_plus_renewal_year"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/supporterPrice"
+                        app:layout_constraintTop_toBottomOf="@id/supporterName"
+                        app:textColor="secondary" />
+
+                </android.support.constraint.ConstraintLayout>
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/donor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingTop="8dp">
+
+                    <presentation.common.widget.QkTextView
+                        android:id="@+id/donorName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/qksms_plus_option_donor"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:textColor="primary" />
+
+                    <presentation.common.widget.QkTextView
+                        android:id="@+id/donorPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toStartOf="@id/donorPeriod"
+                        app:layout_constraintHorizontal_chainStyle="packed"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/donorName"
+                        app:textColor="primary"
+                        tools:text="$2.99" />
+
+                    <presentation.common.widget.QkTextView
+                        android:id="@+id/donorPeriod"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/qksms_plus_renewal_year"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/donorPrice"
+                        app:layout_constraintTop_toBottomOf="@id/donorName"
+                        app:textColor="secondary" />
+
+                </android.support.constraint.ConstraintLayout>
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/philanthropist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingTop="8dp">
+
+                    <presentation.common.widget.QkTextView
+                        android:id="@+id/philanthropistName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/qksms_plus_option_philanthropist"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:textColor="primary" />
+
+                    <presentation.common.widget.QkTextView
+                        android:id="@+id/philanthropistPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toStartOf="@id/philanthropistPeriod"
+                        app:layout_constraintHorizontal_chainStyle="packed"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/philanthropistName"
+                        app:textColor="primary"
+                        tools:text="$2.99" />
+
+                    <presentation.common.widget.QkTextView
+                        android:id="@+id/philanthropistPeriod"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/qksms_plus_renewal_year"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/philanthropistPrice"
+                        app:layout_constraintTop_toBottomOf="@id/philanthropistName"
+                        app:textColor="secondary" />
+
+                </android.support.constraint.ConstraintLayout>
+
+            </LinearLayout>
+
+            <presentation.common.widget.QkTextView
+                android:id="@+id/upgrade"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="8dp"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:paddingTop="8dp">
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/rounded_rectangle_2dp"
+                android:padding="12dp"
+                android:text="@string/qksms_plus_upgrade"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:textColor="primaryOnTheme"
+                tools:backgroundTint="@color/tools_theme"
+                tools:textColor="@color/textPrimaryDark" />
 
-                <presentation.common.widget.QkTextView
-                    android:id="@+id/supporterName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/qksms_plus_option_supporter"
-                    android:textColor="@color/textPrimary"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+            <presentation.common.widget.Separator
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp" />
 
-                <presentation.common.widget.QkTextView
-                    android:id="@+id/supporterPrice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/textPrimary"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toStartOf="@id/supporterPeriod"
-                    app:layout_constraintHorizontal_chainStyle="packed"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/supporterName"
-                    tools:text="$2.99" />
-
-                <presentation.common.widget.QkTextView
-                    android:id="@+id/supporterPeriod"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/qksms_plus_renewal_year"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/supporterPrice"
-                    app:layout_constraintTop_toBottomOf="@id/supporterName"
-                    app:textColor="secondary" />
-
-            </android.support.constraint.ConstraintLayout>
-
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/donor"
-                android:layout_width="wrap_content"
+            <presentation.common.widget.PreferenceView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="8dp"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:paddingTop="8dp">
+                app:icon="@drawable/ic_palette_black_24dp"
+                app:summary="@string/qksms_plus_themes_summary"
+                app:title="@string/qksms_plus_themes_title" />
 
-                <presentation.common.widget.QkTextView
-                    android:id="@+id/donorName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/qksms_plus_option_donor"
-                    android:textColor="@color/textPrimary"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <presentation.common.widget.QkTextView
-                    android:id="@+id/donorPrice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/textPrimary"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toStartOf="@id/donorPeriod"
-                    app:layout_constraintHorizontal_chainStyle="packed"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/donorName"
-                    tools:text="$2.99" />
-
-                <presentation.common.widget.QkTextView
-                    android:id="@+id/donorPeriod"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/qksms_plus_renewal_year"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/donorPrice"
-                    app:layout_constraintTop_toBottomOf="@id/donorName"
-                    app:textColor="secondary" />
-
-            </android.support.constraint.ConstraintLayout>
-
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/philanthropist"
-                android:layout_width="wrap_content"
+            <presentation.common.widget.PreferenceView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="8dp"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:paddingTop="8dp">
+                app:icon="@drawable/ic_favorite_black_24dp"
+                app:summary="@string/qksms_plus_emoji_summary"
+                app:title="@string/qksms_plus_emoji_title" />
 
-                <presentation.common.widget.QkTextView
-                    android:id="@+id/philanthropistName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/qksms_plus_option_philanthropist"
-                    android:textColor="@color/textPrimary"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+            <presentation.common.widget.PreferenceView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/ic_backup_black_24dp"
+                app:summary="@string/qksms_plus_backup_summary"
+                app:title="@string/qksms_plus_backup_title" />
 
-                <presentation.common.widget.QkTextView
-                    android:id="@+id/philanthropistPrice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/textPrimary"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toStartOf="@id/philanthropistPeriod"
-                    app:layout_constraintHorizontal_chainStyle="packed"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/philanthropistName"
-                    tools:text="$2.99" />
+            <presentation.common.widget.PreferenceView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/ic_event_black_24dp"
+                app:summary="@string/qksms_plus_scheduled_summary"
+                app:title="@string/qksms_plus_scheduled_title" />
 
-                <presentation.common.widget.QkTextView
-                    android:id="@+id/philanthropistPeriod"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/qksms_plus_renewal_year"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/philanthropistPrice"
-                    app:layout_constraintTop_toBottomOf="@id/philanthropistName"
-                    app:textColor="secondary" />
+            <presentation.common.widget.PreferenceView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/ic_av_timer_black_24dp"
+                app:summary="@string/qksms_plus_delayed_summary"
+                app:title="@string/qksms_plus_delayed_title" />
 
-            </android.support.constraint.ConstraintLayout>
+            <presentation.common.widget.PreferenceView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/ic_invert_colors_black_24dp"
+                app:summary="@string/qksms_plus_night_summary"
+                app:title="@string/qksms_plus_night_title" />
+
+            <presentation.common.widget.PreferenceView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/ic_block_black_24dp"
+                app:summary="@string/qksms_plus_blacklist_summary"
+                app:title="@string/qksms_plus_blacklist_title" />
+
+            <presentation.common.widget.PreferenceView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/ic_forward_black_24dp"
+                app:summary="@string/qksms_plus_forward_summary"
+                app:title="@string/qksms_plus_forward_title" />
+
+            <presentation.common.widget.PreferenceView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/ic_reply_black_24dp"
+                app:summary="@string/qksms_plus_respond_summary"
+                app:title="@string/qksms_plus_respond_title" />
+
+            <presentation.common.widget.PreferenceView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/ic_more_horiz_black_24dp"
+                app:summary="@string/qksms_plus_more_summary"
+                app:title="@string/qksms_plus_more_title" />
 
         </LinearLayout>
 
-        <presentation.common.widget.QkTextView
-            android:id="@+id/upgrade"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/rounded_rectangle_2dp"
-            android:padding="12dp"
-            android:text="@string/qksms_plus_upgrade"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            app:textColor="primaryOnTheme"
-            tools:backgroundTint="@color/tools_theme"
-            tools:textColor="@color/textPrimaryDark" />
+    </android.support.v4.widget.NestedScrollView>
 
-        <presentation.common.widget.Separator
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="16dp" />
-
-        <presentation.common.widget.PreferenceView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:icon="@drawable/ic_palette_black_24dp"
-            app:summary="@string/qksms_plus_themes_summary"
-            app:title="@string/qksms_plus_themes_title" />
-
-        <presentation.common.widget.PreferenceView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:icon="@drawable/ic_favorite_black_24dp"
-            app:summary="@string/qksms_plus_emoji_summary"
-            app:title="@string/qksms_plus_emoji_title" />
-
-        <presentation.common.widget.PreferenceView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:icon="@drawable/ic_backup_black_24dp"
-            app:summary="@string/qksms_plus_backup_summary"
-            app:title="@string/qksms_plus_backup_title" />
-
-        <presentation.common.widget.PreferenceView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:icon="@drawable/ic_event_black_24dp"
-            app:summary="@string/qksms_plus_scheduled_summary"
-            app:title="@string/qksms_plus_scheduled_title" />
-
-        <presentation.common.widget.PreferenceView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:icon="@drawable/ic_av_timer_black_24dp"
-            app:summary="@string/qksms_plus_delayed_summary"
-            app:title="@string/qksms_plus_delayed_title" />
-
-        <presentation.common.widget.PreferenceView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:icon="@drawable/ic_invert_colors_black_24dp"
-            app:summary="@string/qksms_plus_night_summary"
-            app:title="@string/qksms_plus_night_title" />
-
-        <presentation.common.widget.PreferenceView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:icon="@drawable/ic_block_black_24dp"
-            app:summary="@string/qksms_plus_blacklist_summary"
-            app:title="@string/qksms_plus_blacklist_title" />
-
-        <presentation.common.widget.PreferenceView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:icon="@drawable/ic_forward_black_24dp"
-            app:summary="@string/qksms_plus_forward_summary"
-            app:title="@string/qksms_plus_forward_title" />
-
-        <presentation.common.widget.PreferenceView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:icon="@drawable/ic_reply_black_24dp"
-            app:summary="@string/qksms_plus_respond_summary"
-            app:title="@string/qksms_plus_respond_title" />
-
-        <presentation.common.widget.PreferenceView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:icon="@drawable/ic_more_horiz_black_24dp"
-            app:summary="@string/qksms_plus_more_summary"
-            app:title="@string/qksms_plus_more_title" />
-
-    </LinearLayout>
-
-</ScrollView>
+</android.support.design.widget.CoordinatorLayout>

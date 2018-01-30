@@ -36,7 +36,15 @@ class PlusActivity : QkActivity<PlusViewModel>(), PlusView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.qksms_plus_activity)
         setTitle(R.string.title_qksms_plus)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         viewModel.bindView(this)
+
+        colors.textPrimary
+                .autoDisposable(scope())
+                .subscribe { color ->
+                    collapsingToolbar.setCollapsedTitleTextColor(color)
+                    collapsingToolbar.setExpandedTitleColor(color)
+                }
 
         colors.background
                 .autoDisposable(scope())

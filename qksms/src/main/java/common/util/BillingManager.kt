@@ -108,9 +108,11 @@ class BillingManager @Inject constructor(context: Context) : PurchasesUpdatedLis
 
     fun initiatePurchaseFlow(activity: Activity, sku: String) {
         executeServiceRequest {
-            purchaseList
+            val oldSkus = purchaseList
+                    .filter { it.sku == SKU_3 || it.sku == SKU_5 || it.sku == SKU_10 }
+                    .map { it.sku }
 
-            val params = BillingFlowParams.newBuilder().setSku(sku).setType(SkuType.SUBS)
+            val params = BillingFlowParams.newBuilder().setSku(sku).setType(SkuType.SUBS).setOldSkus(ArrayList(oldSkus))
             billingClient.launchBillingFlow(activity, params.build())
         }
     }
@@ -125,7 +127,8 @@ class BillingManager @Inject constructor(context: Context) : PurchasesUpdatedLis
     override fun onPurchasesUpdated(resultCode: Int, purchases: List<Purchase>?) {
         when (resultCode) {
             BillingResponse.OK -> {
-                purchases?.forEach { purchaseList.add(it) }
+                purchaseList.clear()
+                purchases?.let { purchaseList.addAll(it) }
                 (this.purchases as Subject).onNext(purchaseList)
             }
 

@@ -18,6 +18,8 @@
  */
 package presentation.feature.plus
 
+import com.uber.autodispose.android.lifecycle.scope
+import com.uber.autodispose.kotlin.autoDisposable
 import common.di.appComponent
 import common.util.BillingManager
 import io.reactivex.rxkotlin.plusAssign
@@ -45,6 +47,22 @@ class PlusViewModel : QkViewModel<PlusView, PlusState>(PlusState()) {
                                 philanthropistPrice = subs.firstOrNull { it.sku == BillingManager.SKU_10 }?.price ?: "")
                     }
                 }
+    }
+
+    override fun bindView(view: PlusView) {
+        super.bindView(view)
+
+        view.supporterSelectedIntent
+                .autoDisposable(view.scope())
+                .subscribe { newState { it.copy(selectedPlan = BillingManager.SKU_3) } }
+
+        view.donorSelectedIntent
+                .autoDisposable(view.scope())
+                .subscribe { newState { it.copy(selectedPlan = BillingManager.SKU_5) } }
+
+        view.philanthropistSelectedIntent
+                .autoDisposable(view.scope())
+                .subscribe { newState { it.copy(selectedPlan = BillingManager.SKU_10) } }
     }
 
 }

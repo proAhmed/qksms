@@ -18,8 +18,13 @@
  */
 package presentation.feature.plus
 
+import io.reactivex.Observable
 import presentation.common.base.QkView
 
 interface PlusView : QkView<PlusState> {
+
+    val supporterSelectedIntent: Observable<Unit>
+    val donorSelectedIntent: Observable<Unit>
+    val philanthropistSelectedIntent: Observable<Unit>
 
 }

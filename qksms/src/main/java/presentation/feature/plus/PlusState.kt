@@ -18,10 +18,11 @@
  */
 package presentation.feature.plus
 
-data class PlusState(
+import common.util.BillingManager
 
+data class PlusState(
+        val selectedPlan: String = BillingManager.SKU_5,
         val supporterPrice: String = "",
         val donorPrice: String = "",
         val philanthropistPrice: String = ""
-
 )

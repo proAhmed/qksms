@@ -19,10 +19,12 @@
 package presentation.feature.plus
 
 import android.os.Bundle
+import com.jakewharton.rxbinding2.view.clicks
 import com.moez.QKSMS.R
 import com.uber.autodispose.android.lifecycle.scope
 import com.uber.autodispose.kotlin.autoDisposable
 import common.di.appComponent
+import common.util.BillingManager
 import common.util.extensions.setBackgroundTint
 import kotlinx.android.synthetic.main.qksms_plus_activity.*
 import presentation.common.base.QkActivity
@@ -30,6 +32,9 @@ import presentation.common.base.QkActivity
 class PlusActivity : QkActivity<PlusViewModel>(), PlusView {
 
     override val viewModelClass = PlusViewModel::class
+    override val supporterSelectedIntent by lazy { supporter.clicks() }
+    override val donorSelectedIntent by lazy { donor.clicks() }
+    override val philanthropistSelectedIntent by lazy { philanthropist.clicks() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         appComponent.inject(this)
@@ -58,8 +63,13 @@ class PlusActivity : QkActivity<PlusViewModel>(), PlusView {
     override fun render(state: PlusState) {
         description.text = getString(R.string.qksms_plus_description_summary, state.supporterPrice)
 
+        supporter.isSelected = state.selectedPlan == BillingManager.SKU_3
         supporterPrice.text = state.supporterPrice
+
+        donor.isSelected = state.selectedPlan == BillingManager.SKU_5
         donorPrice.text = state.donorPrice
+
+        philanthropist.isSelected = state.selectedPlan == BillingManager.SKU_10
         philanthropistPrice.text = state.philanthropistPrice
     }
 

@@ -35,6 +35,7 @@ class PlusActivity : QkActivity<PlusViewModel>(), PlusView {
     override val supporterSelectedIntent by lazy { supporter.clicks() }
     override val donorSelectedIntent by lazy { donor.clicks() }
     override val philanthropistSelectedIntent by lazy { philanthropist.clicks() }
+    override val purchaseIntent by lazy { upgrade.clicks() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         appComponent.inject(this)
@@ -71,6 +72,10 @@ class PlusActivity : QkActivity<PlusViewModel>(), PlusView {
 
         philanthropist.isSelected = state.selectedPlan == BillingManager.SKU_10
         philanthropistPrice.text = state.philanthropistPrice
+    }
+
+    override fun initiatePurchaseFlow(billingManager: BillingManager, sku: String) {
+        billingManager.initiatePurchaseFlow(this, sku)
     }
 
 }

@@ -18,6 +18,7 @@
  */
 package presentation.feature.plus
 
+import common.util.BillingManager
 import io.reactivex.Observable
 import presentation.common.base.QkView
 
@@ -26,5 +27,8 @@ interface PlusView : QkView<PlusState> {
     val supporterSelectedIntent: Observable<Unit>
     val donorSelectedIntent: Observable<Unit>
     val philanthropistSelectedIntent: Observable<Unit>
+    val purchaseIntent: Observable<Unit>
+
+    fun initiatePurchaseFlow(billingManager: BillingManager, sku: String)
 
 }

@@ -106,9 +106,11 @@ class BillingManager @Inject constructor(context: Context) : PurchasesUpdatedLis
         }
     }
 
-    fun initiatePurchaseFlow(activity: Activity) {
+    fun initiatePurchaseFlow(activity: Activity, sku: String) {
         executeServiceRequest {
-            val params = BillingFlowParams.newBuilder().setSku("qksms_plus_3").setType(SkuType.SUBS)
+            purchaseList
+
+            val params = BillingFlowParams.newBuilder().setSku(sku).setType(SkuType.SUBS)
             billingClient.launchBillingFlow(activity, params.build())
         }
     }

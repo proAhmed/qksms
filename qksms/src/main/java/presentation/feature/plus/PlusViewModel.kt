@@ -23,6 +23,7 @@ import com.uber.autodispose.kotlin.autoDisposable
 import common.di.appComponent
 import common.util.BillingManager
 import io.reactivex.rxkotlin.plusAssign
+import io.reactivex.rxkotlin.withLatestFrom
 import presentation.common.base.QkViewModel
 import timber.log.Timber
 import javax.inject.Inject
@@ -63,6 +64,11 @@ class PlusViewModel : QkViewModel<PlusView, PlusState>(PlusState()) {
         view.philanthropistSelectedIntent
                 .autoDisposable(view.scope())
                 .subscribe { newState { it.copy(selectedPlan = BillingManager.SKU_10) } }
+
+        view.purchaseIntent
+                .withLatestFrom(state, {_, state -> state.selectedPlan})
+                .autoDisposable(view.scope())
+                .subscribe { sku -> view.initiatePurchaseFlow(billingManager, sku) }
     }
 
 }

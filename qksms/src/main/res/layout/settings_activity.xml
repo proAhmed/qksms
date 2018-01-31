@@ -41,13 +41,6 @@
                 android:orientation="vertical">
 
                 <presentation.common.widget.PreferenceView
-                    android:id="@+id/plus"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:summary="@string/qksms_plus_description_summary"
-                    app:title="@string/qksms_plus_description_title" />
-
-                <presentation.common.widget.PreferenceView
                     android:id="@+id/defaultSms"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

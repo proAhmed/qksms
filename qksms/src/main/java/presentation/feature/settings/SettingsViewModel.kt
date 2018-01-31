@@ -92,8 +92,6 @@ class SettingsViewModel : QkViewModel<SettingsView, SettingsState>(SettingsState
                     Timber.v("Preference click: ${context.resources.getResourceName(it.id)}")
 
                     when (it.id) {
-                        R.id.plus -> navigator.showQksmsPlusActivity()
-
                         R.id.defaultSms -> navigator.showDefaultSmsDialog()
 
                         R.id.theme -> navigator.showThemePicker()

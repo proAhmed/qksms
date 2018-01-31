@@ -22,7 +22,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    tools:background="@color/white">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -33,7 +33,6 @@
             android:id="@+id/collapsingToolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
             app:collapsedTitleTextAppearance="@style/CollapsingToolbarCollapsedText"
             app:expandedTitleTextAppearance="@style/CollapsingToolbarExpandedText"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
@@ -82,8 +81,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginBottom="16dp"
-                android:layout_marginLeft="32dp"
-                android:layout_marginRight="32dp"
                 android:layout_marginTop="16dp" />
 
             <LinearLayout
@@ -242,7 +239,6 @@
                 android:id="@+id/thanks"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
                 android:layout_marginLeft="24dp"
                 android:layout_marginRight="24dp"
                 android:layout_marginTop="16dp"
@@ -254,9 +250,9 @@
                     android:id="@+id/thanksIcon"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/ic_favorite_black_24dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:src="@drawable/ic_favorite_black_24dp" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <presentation.common.widget.QkTextView
                     android:id="@+id/thanksTitle"
@@ -281,21 +277,6 @@
                     app:textColor="secondary" />
 
             </android.support.constraint.ConstraintLayout>
-
-            <presentation.common.widget.QkTextView
-                android:id="@+id/upgrade"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/rounded_rectangle_2dp"
-                android:padding="12dp"
-                android:text="@string/qksms_plus_upgrade"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:textColor="primaryOnTheme"
-                tools:backgroundTint="@color/tools_theme"
-                tools:textColor="@color/textPrimaryDark" />
 
             <presentation.common.widget.Separator
                 android:layout_width="match_parent"

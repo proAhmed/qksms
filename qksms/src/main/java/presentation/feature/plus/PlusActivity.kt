@@ -37,7 +37,6 @@ class PlusActivity : QkActivity<PlusViewModel>(), PlusView {
     override val supporterSelectedIntent by lazy { supporter.clicks() }
     override val donorSelectedIntent by lazy { donor.clicks() }
     override val philanthropistSelectedIntent by lazy { philanthropist.clicks() }
-    override val purchaseIntent by lazy { upgrade.clicks() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         appComponent.inject(this)
@@ -64,25 +63,21 @@ class PlusActivity : QkActivity<PlusViewModel>(), PlusView {
 
         colors.theme
                 .autoDisposable(scope())
-                .subscribe { color ->
-                    thanksIcon.setTint(color)
-                    upgrade.setBackgroundTint(color)
-                }
+                .subscribe { color -> thanksIcon.setTint(color) }
     }
 
     override fun render(state: PlusState) {
         description.text = getString(R.string.qksms_plus_description_summary, state.supporterPrice)
 
-        upgrade.setVisible(state.currentPlan == BillingManager.UpgradeStatus.REGULAR)
         thanks.setVisible(state.currentPlan != BillingManager.UpgradeStatus.REGULAR)
 
-        supporter.isSelected = state.selectedPlan == BillingManager.SKU_3
+        supporter.isSelected = state.currentPlan == BillingManager.UpgradeStatus.SUPPORTER
         supporterPrice.text = state.supporterPrice
 
-        donor.isSelected = state.selectedPlan == BillingManager.SKU_5
+        donor.isSelected = state.currentPlan == BillingManager.UpgradeStatus.DONOR
         donorPrice.text = state.donorPrice
 
-        philanthropist.isSelected = state.selectedPlan == BillingManager.SKU_10
+        philanthropist.isSelected = state.currentPlan == BillingManager.UpgradeStatus.PHILANTHROPIST
         philanthropistPrice.text = state.philanthropistPrice
     }
 

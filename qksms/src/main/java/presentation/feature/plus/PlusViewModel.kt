@@ -23,7 +23,6 @@ import com.uber.autodispose.kotlin.autoDisposable
 import common.di.appComponent
 import common.util.BillingManager
 import io.reactivex.rxkotlin.plusAssign
-import io.reactivex.rxkotlin.withLatestFrom
 import presentation.common.base.QkViewModel
 import javax.inject.Inject
 
@@ -36,11 +35,7 @@ class PlusViewModel : QkViewModel<PlusView, PlusState>(PlusState()) {
 
         disposables += billingManager.plusStatus
                 .subscribe { plan ->
-                    newState {
-                        // If the user has QKSMS+, don't highlight anything. Otherwise suggest SKU_5
-                        val selectedPlan = if (plan != BillingManager.UpgradeStatus.REGULAR) null else BillingManager.SKU_5
-                        it.copy(currentPlan = plan, selectedPlan = selectedPlan)
-                    }
+                    newState { it.copy(currentPlan = plan) }
                 }
 
         disposables += billingManager.subscriptions
@@ -59,20 +54,15 @@ class PlusViewModel : QkViewModel<PlusView, PlusState>(PlusState()) {
 
         view.supporterSelectedIntent
                 .autoDisposable(view.scope())
-                .subscribe { newState { it.copy(selectedPlan = BillingManager.SKU_3) } }
+                .subscribe { view.initiatePurchaseFlow(billingManager, BillingManager.SKU_3) }
 
         view.donorSelectedIntent
                 .autoDisposable(view.scope())
-                .subscribe { newState { it.copy(selectedPlan = BillingManager.SKU_5) } }
+                .subscribe { view.initiatePurchaseFlow(billingManager, BillingManager.SKU_5) }
 
         view.philanthropistSelectedIntent
                 .autoDisposable(view.scope())
-                .subscribe { newState { it.copy(selectedPlan = BillingManager.SKU_10) } }
-
-        view.purchaseIntent
-                .withLatestFrom(state, { _, state -> state.selectedPlan })
-                .autoDisposable(view.scope())
-                .subscribe { sku -> view.initiatePurchaseFlow(billingManager, sku.orEmpty()) }
+                .subscribe { view.initiatePurchaseFlow(billingManager, BillingManager.SKU_10) }
     }
 
 }

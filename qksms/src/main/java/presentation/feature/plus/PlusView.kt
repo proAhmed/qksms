@@ -27,7 +27,6 @@ interface PlusView : QkView<PlusState> {
     val supporterSelectedIntent: Observable<Unit>
     val donorSelectedIntent: Observable<Unit>
     val philanthropistSelectedIntent: Observable<Unit>
-    val purchaseIntent: Observable<Unit>
 
     fun initiatePurchaseFlow(billingManager: BillingManager, sku: String)
 

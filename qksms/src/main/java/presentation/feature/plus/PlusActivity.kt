@@ -59,7 +59,12 @@ class PlusActivity : QkActivity<PlusViewModel>(), PlusView {
 
         colors.separator
                 .autoDisposable(scope())
-                .subscribe { color -> thanks.setBackgroundTint(color) }
+                .subscribe { color ->
+                    thanks.setBackgroundTint(color)
+                    supporter.setBackgroundTint(color)
+                    donor.setBackgroundTint(color)
+                    philanthropist.setBackgroundTint(color)
+                }
 
         colors.theme
                 .autoDisposable(scope())

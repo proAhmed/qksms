@@ -30,6 +30,7 @@ import common.util.extensions.setTint
 import common.util.extensions.setVisible
 import kotlinx.android.synthetic.main.qksms_plus_activity.*
 import presentation.common.base.QkActivity
+import presentation.common.widget.QkTextView
 
 class PlusActivity : QkActivity<PlusViewModel>(), PlusView {
 
@@ -59,16 +60,16 @@ class PlusActivity : QkActivity<PlusViewModel>(), PlusView {
 
         colors.separator
                 .autoDisposable(scope())
+                .subscribe { color -> thanks.setBackgroundTint(color) }
+
+        colors.theme
+                .autoDisposable(scope())
                 .subscribe { color ->
-                    thanks.setBackgroundTint(color)
+                    thanksIcon.setTint(color)
                     supporter.setBackgroundTint(color)
                     donor.setBackgroundTint(color)
                     philanthropist.setBackgroundTint(color)
                 }
-
-        colors.theme
-                .autoDisposable(scope())
-                .subscribe { color -> thanksIcon.setTint(color) }
     }
 
     override fun render(state: PlusState) {
@@ -76,14 +77,34 @@ class PlusActivity : QkActivity<PlusViewModel>(), PlusView {
 
         thanks.setVisible(state.currentPlan != BillingManager.UpgradeStatus.REGULAR)
 
-        supporter.isSelected = state.currentPlan == BillingManager.UpgradeStatus.SUPPORTER
+        val supportedSelected = state.currentPlan == BillingManager.UpgradeStatus.SUPPORTER
+        supporter.isSelected = supportedSelected
         supporterPrice.text = state.supporterPrice
+        supporterName.setColor(getPrimaryTextColorAttr(supportedSelected))
+        supporterPrice.setColor(getPrimaryTextColorAttr(supportedSelected))
+        supporterPeriod.setColor(getSecondaryTextColorAttr(supportedSelected))
 
-        donor.isSelected = state.currentPlan == BillingManager.UpgradeStatus.DONOR
+        val donorSelected = state.currentPlan == BillingManager.UpgradeStatus.DONOR
+        donor.isSelected = donorSelected
         donorPrice.text = state.donorPrice
+        donorName.setColor(getPrimaryTextColorAttr(donorSelected))
+        donorPrice.setColor(getPrimaryTextColorAttr(donorSelected))
+        donorPeriod.setColor(getSecondaryTextColorAttr(donorSelected))
 
-        philanthropist.isSelected = state.currentPlan == BillingManager.UpgradeStatus.PHILANTHROPIST
+        val philanthropistSelected = state.currentPlan == BillingManager.UpgradeStatus.PHILANTHROPIST
+        philanthropist.isSelected = philanthropistSelected
         philanthropistPrice.text = state.philanthropistPrice
+        philanthropistName.setColor(getPrimaryTextColorAttr(philanthropistSelected))
+        philanthropistPrice.setColor(getPrimaryTextColorAttr(philanthropistSelected))
+        philanthropistPeriod.setColor(getSecondaryTextColorAttr(philanthropistSelected))
+    }
+
+    private fun getPrimaryTextColorAttr(selected: Boolean): Int {
+        return if (selected) QkTextView.COLOR_PRIMARY_ON_THEME else QkTextView.COLOR_PRIMARY
+    }
+
+    private fun getSecondaryTextColorAttr(selected: Boolean): Int {
+        return if (selected) QkTextView.COLOR_SECONDARY_ON_THEME else QkTextView.COLOR_SECONDARY
     }
 
     override fun initiatePurchaseFlow(billingManager: BillingManager, sku: String) {

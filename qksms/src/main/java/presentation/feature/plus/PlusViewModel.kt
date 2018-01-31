@@ -25,7 +25,6 @@ import common.util.BillingManager
 import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.rxkotlin.withLatestFrom
 import presentation.common.base.QkViewModel
-import timber.log.Timber
 import javax.inject.Inject
 
 class PlusViewModel : QkViewModel<PlusView, PlusState>(PlusState()) {
@@ -35,11 +34,16 @@ class PlusViewModel : QkViewModel<PlusView, PlusState>(PlusState()) {
     init {
         appComponent.inject(this)
 
-        billingManager.purchases.subscribe { purchases -> Timber.v("Purchases: $purchases") }
-        billingManager.iabs.subscribe { iabs -> Timber.v("IABs: $iabs") }
-        billingManager.subs.subscribe { subs -> Timber.v("Subs: $subs") }
+        disposables += billingManager.plusStatus
+                .subscribe { plan ->
+                    newState {
+                        // If the user has QKSMS+, don't highlight anything. Otherwise suggest SKU_5
+                        val selectedPlan = if (plan != BillingManager.UpgradeStatus.REGULAR) null else BillingManager.SKU_5
+                        it.copy(currentPlan = plan, selectedPlan = selectedPlan)
+                    }
+                }
 
-        disposables += billingManager.subs
+        disposables += billingManager.subscriptions
                 .subscribe { subs ->
                     newState {
                         it.copy(
@@ -66,9 +70,9 @@ class PlusViewModel : QkViewModel<PlusView, PlusState>(PlusState()) {
                 .subscribe { newState { it.copy(selectedPlan = BillingManager.SKU_10) } }
 
         view.purchaseIntent
-                .withLatestFrom(state, {_, state -> state.selectedPlan})
+                .withLatestFrom(state, { _, state -> state.selectedPlan })
                 .autoDisposable(view.scope())
-                .subscribe { sku -> view.initiatePurchaseFlow(billingManager, sku) }
+                .subscribe { sku -> view.initiatePurchaseFlow(billingManager, sku.orEmpty()) }
     }
 
 }

@@ -26,6 +26,8 @@ import com.uber.autodispose.kotlin.autoDisposable
 import common.di.appComponent
 import common.util.BillingManager
 import common.util.extensions.setBackgroundTint
+import common.util.extensions.setTint
+import common.util.extensions.setVisible
 import kotlinx.android.synthetic.main.qksms_plus_activity.*
 import presentation.common.base.QkActivity
 
@@ -56,13 +58,23 @@ class PlusActivity : QkActivity<PlusViewModel>(), PlusView {
                 .autoDisposable(scope())
                 .subscribe { color -> window.decorView.setBackgroundColor(color) }
 
+        colors.separator
+                .autoDisposable(scope())
+                .subscribe { color -> thanks.setBackgroundTint(color) }
+
         colors.theme
                 .autoDisposable(scope())
-                .subscribe { color -> upgrade.setBackgroundTint(color) }
+                .subscribe { color ->
+                    thanksIcon.setTint(color)
+                    upgrade.setBackgroundTint(color)
+                }
     }
 
     override fun render(state: PlusState) {
         description.text = getString(R.string.qksms_plus_description_summary, state.supporterPrice)
+
+        upgrade.setVisible(state.currentPlan == BillingManager.UpgradeStatus.REGULAR)
+        thanks.setVisible(state.currentPlan != BillingManager.UpgradeStatus.REGULAR)
 
         supporter.isSelected = state.selectedPlan == BillingManager.SKU_3
         supporterPrice.text = state.supporterPrice

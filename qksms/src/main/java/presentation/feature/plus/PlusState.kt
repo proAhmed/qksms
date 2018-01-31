@@ -21,7 +21,8 @@ package presentation.feature.plus
 import common.util.BillingManager
 
 data class PlusState(
-        val selectedPlan: String = BillingManager.SKU_5,
+        val currentPlan: BillingManager.UpgradeStatus = BillingManager.UpgradeStatus.REGULAR,
+        val selectedPlan: String? = null,
         val supporterPrice: String = "",
         val donorPrice: String = "",
         val philanthropistPrice: String = ""

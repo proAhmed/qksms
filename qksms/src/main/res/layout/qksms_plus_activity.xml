@@ -238,6 +238,50 @@
 
             </LinearLayout>
 
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/thanks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/rounded_rectangle_2dp"
+                android:padding="16dp"
+                tools:backgroundTint="@color/separatorLight">
+
+                <ImageView
+                    android:id="@+id/thanksIcon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:src="@drawable/ic_favorite_black_24dp" />
+
+                <presentation.common.widget.QkTextView
+                    android:id="@+id/thanksTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:text="@string/qksms_plus_thanks_title"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/thanksIcon"
+                    app:textColor="primary" />
+
+                <presentation.common.widget.QkTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/qksms_plus_thanks_summary"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="@id/thanksTitle"
+                    app:layout_constraintStart_toStartOf="@id/thanksTitle"
+                    app:layout_constraintTop_toBottomOf="@id/thanksTitle"
+                    app:textColor="secondary" />
+
+            </android.support.constraint.ConstraintLayout>
+
             <presentation.common.widget.QkTextView
                 android:id="@+id/upgrade"
                 android:layout_width="wrap_content"

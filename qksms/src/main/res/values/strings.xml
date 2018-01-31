@@ -94,6 +94,8 @@
     <string name="qksms_plus_option_philanthropist">Philanthropist</string>
     <string name="qksms_plus_renewal_year">/year</string>
     <string name="qksms_plus_upgrade">Upgrade to QKSMS+</string>
+    <string name="qksms_plus_thanks_title">Thank you for supporting QKSMS!</string>
+    <string name="qksms_plus_thanks_summary">You now have access to all QKSMS+ features</string>
     <string name="qksms_plus_themes_title">Premium themes</string>
     <string name="qksms_plus_themes_summary">Unlock beautiful theme colors not available on the Material Design palette</string>
     <string name="qksms_plus_emoji_title">Custom auto-emoji</string>
